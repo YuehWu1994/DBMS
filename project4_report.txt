@@ -1,0 +1,48 @@
+1. Basic information
+Team number (e.g., 01) : 08
+#1 Student ID : 90289484
+#1 Student Name : Wei-Che Chen
+#2 Student ID : 69928284
+#2 Student Name : Yueh Wu
+OS (bit) : MAC XOS 10.13.6
+gcc version : 5.4.0
+
+
+2. Catalog information about Index
+- Show your catalog information about an index (tables, columns). 
+    Instead of saving index information at tables table and columns table, I would create an index catalog file (format = tableName + "_idx") to record index-file name and index attribute name given any newly created table. It allows us to access every index files and insert/delete/update entries by extracting slots at this index catalog.
+
+3. Block Nested Loop Join (If you have implemented this feature)
+- Describe how your block nested loop join works (especially, how you manage the given buffers.)
+    For Block Nested Loop Join, I first load tuples from left tables into a map until the total size is not larger than numPages * 4096. After that, I start loop through all the tuples of right table, if I found a value that match, then I write to the disk. And load the next block of left tables again. I also use an output buffer that store the matched tuples, if the output buffer is full, I write it to the disk. That saves some I/O.
+
+
+4. Index Nested Loop Join (If you have implemented this feature)
+- Describe how your grace hash join works.
+     For every tuple of left table, I use equal operator on index scan iterator to locate the tuple that same as left table's tuple. 
+
+
+5. Grace Hash Join (If you have implemented this feature)
+- Describe how your grace hash join works (especially, in-memory structure).
+     I use hash function to classify which partition that tuple should go in. And then write into that partition. I do this both on left table and right table. And then I load on of the left partition and store it into hashmap. Then load tuple from right partition one by one, if I found any matched value to the hashmap, I write it to the disk. And I use a TableScan iterator on the output table.
+
+
+6. Aggregation
+- Describe how your aggregation (basic, group-based hash) works.
+    I loop through all the values and calculate the interesting value given the condition.
+    For group-based, I use map to store the unique value. And loop through the unique value and calculate the interesting value.
+
+
+7. Implementation Detail
+- Have you added your own source file (.cc or .h)? No
+
+- Have you implemented any optional features? Then, describe them here.
+    Group-based aggregation and Grace Hash Join. Both illustrate above.
+
+- Other implementation details:
+
+
+
+6. Other (optional)
+- Freely use this section to tell us about things that are related to the project 4, but not related to the other sections (optional)
+
