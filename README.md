@@ -13,9 +13,9 @@
 -	**rm/**: Relation Manager
 -	**ix/**: Index Manager
 -	**qe/**: Query Operator Engine
--	README.md**
--	makefile.inc**
--	project1_report.txt**
--	project2_report.txt**
--	project3_report.txt**
--	project4_report.txt**
+-	README.md
+-	makefile.inc
+-	project1_report.txt
+-	project2_report.txt
+-	project3_report.txt
+-	project4_report.txt
